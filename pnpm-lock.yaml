@@ -32,6 +32,9 @@ importers:
       '@angular/router':
         specifier: ~13.2.0
         version: 13.2.7(@angular/common@13.2.7(@angular/core@13.2.7(rxjs@7.5.7)(zone.js@0.11.8))(rxjs@7.5.7))(@angular/core@13.2.7(rxjs@7.5.7)(zone.js@0.11.8))(@angular/platform-browser@13.2.7(@angular/animations@13.2.7(@angular/core@13.2.7(rxjs@7.5.7)(zone.js@0.11.8)))(@angular/common@13.2.7(@angular/core@13.2.7(rxjs@7.5.7)(zone.js@0.11.8))(rxjs@7.5.7))(@angular/core@13.2.7(rxjs@7.5.7)(zone.js@0.11.8)))(rxjs@7.5.7)
+      '@picocss/pico':
+        specifier: ^1.4.4
+        version: 1.5.13
       rxjs:
         specifier: ~7.5.0
         version: 7.5.7
@@ -866,6 +869,9 @@ packages:
 
   '@npmcli/run-script@2.0.0':
     resolution: {integrity: sha512-fSan/Pu11xS/TdaTpTB0MRn9guwGU8dye+x56mEVgBEd/QsybBbYcAL0phPXi8SGWFEChkQd6M9qL4y6VOpFig==}
+
+  '@picocss/pico@1.5.13':
+    resolution: {integrity: sha512-BPTeE4JC95+7/vsG9r+6hDR1qUkV4YZ1blI/TI6peOmM94XubjmUDE3jUi4f6DBV6WmCL76ueTct/NerJ33E8A==}
 
   '@schematics/angular@13.2.6':
     resolution: {integrity: sha512-8NzHMX9+FSgaB0lJYxlTJv9OcBuolwZJqo9M/yX3RPSqSHghA33jWwgVbV551hBJOpbVEePerG1DQkIC99DXKA==}
@@ -5039,6 +5045,8 @@ snapshots:
     transitivePeerDependencies:
       - bluebird
       - supports-color
+
+  '@picocss/pico@1.5.13': {}
 
   '@schematics/angular@13.2.6(chokidar@3.6.0)':
     dependencies:
