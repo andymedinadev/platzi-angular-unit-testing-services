@@ -2,7 +2,7 @@ import { MasterService } from './master.service';
 import { ValueService } from './value.service';
 import { FakeValueService } from './value-fake.service';
 
-fdescribe('MasterService tests', () => {
+describe('MasterService tests', () => {
   it('should return "my value" from the real service', () => {
     const valueService = new ValueService();
 
