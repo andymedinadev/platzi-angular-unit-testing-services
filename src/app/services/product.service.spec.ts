@@ -1,4 +1,5 @@
 import { TestBed } from '@angular/core/testing';
+import { HttpStatusCode } from '@angular/common/http';
 import {
   HttpClientTestingModule,
   HttpTestingController,
@@ -11,7 +12,7 @@ import {
 } from '../models/product.mock';
 import { CreateProductDTO, Product, UpdateProductDTO } from '../models';
 
-fdescribe('Product Service tests', () => {
+describe('Product Service tests', () => {
   let productService: ProductService;
   let httpController: HttpTestingController;
 
@@ -134,6 +135,93 @@ fdescribe('Product Service tests', () => {
       //Assert
       expect(params.get('limit')).toEqual(`${limit}`);
       expect(params.get('offset')).toEqual(`${offset}`);
+    });
+  });
+
+  describe('Tests for getOne', () => {
+    it('should return a product', (doneFn) => {
+      const mockData: Product = generateOneProduct();
+
+      const productId = '1';
+      productService.getOne(productId).subscribe((data) => {
+        expect(data).toEqual(mockData);
+        doneFn();
+      });
+
+      // HTTP config
+      const url = `${environment.API_URL}/api/v1/products/${productId}`;
+      const req = httpController.expectOne(url);
+      expect(req.request.method).toEqual('GET');
+      req.flush(mockData);
+    });
+
+    it('should return a 409 error', (doneFn) => {
+      const productId = '1';
+      const msgError = 'Algo esta fallando en el server';
+
+      const mockError = {
+        status: HttpStatusCode.Conflict,
+        statusText: msgError,
+      };
+
+      productService.getOne(productId).subscribe({
+        error: (error) => {
+          expect(error).toEqual(msgError);
+          doneFn();
+        },
+      });
+
+      // HTTP config
+      const url = `${environment.API_URL}/api/v1/products/${productId}`;
+      const req = httpController.expectOne(url);
+      expect(req.request.method).toEqual('GET');
+      req.flush(msgError, mockError);
+    });
+
+    it('should return a 404 error', (doneFn) => {
+      const productId = '1';
+      const msgError = 'El producto no existe';
+
+      const mockError = {
+        status: HttpStatusCode.NotFound,
+        statusText: msgError,
+      };
+
+      productService.getOne(productId).subscribe({
+        error: (error) => {
+          expect(error).toEqual(msgError);
+          doneFn();
+        },
+      });
+
+      // HTTP config
+      const url = `${environment.API_URL}/api/v1/products/${productId}`;
+      const req = httpController.expectOne(url);
+      expect(req.request.method).toEqual('GET');
+      req.flush(msgError, mockError);
+    });
+
+    it('should return an unauthorized error', (doneFn) => {
+      const productId = '1';
+      const msgError = 'No estas permitido';
+
+      const mockError = {
+        status: HttpStatusCode.Unauthorized,
+        statusText: msgError,
+      };
+
+      productService.getOne(productId).subscribe({
+        error: (error) => {
+          expect(error).toEqual(msgError);
+          doneFn();
+        },
+      });
+
+      // HTTP config
+      const url = `${environment.API_URL}/api/v1/products/${productId}`;
+      const req = httpController.expectOne(url);
+      expect(req.request.method).toEqual('GET');
+      req.flush(msgError, mockError);
     });
   });
 
