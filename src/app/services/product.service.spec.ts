@@ -5,6 +5,7 @@ import {
 } from '@angular/common/http/testing';
 import { ProductService } from './product.service';
 import { environment } from 'src/environments/environment';
+import { generateManyProducts } from '../models/product.mock';
 import { Product } from '../models';
 
 fdescribe('Product Service tests', () => {
@@ -28,19 +29,7 @@ fdescribe('Product Service tests', () => {
   describe('Tests for getAllSimple', () => {
     it('should return a product list', (doneFn) => {
       //Arrange
-      const mockData: Product[] = [
-        {
-          id: '123',
-          title: 'title',
-          description: '',
-          price: 12,
-          category: {
-            id: 123,
-            name: 'categoryName',
-          },
-          images: ['img', 'img'],
-        },
-      ];
+      const mockData: Product[] = generateManyProducts(3);
 
       //Act
       productService.getAllSimple().subscribe((data) => {
