@@ -1,0 +1,20 @@
+name: CI for Angular
+on: push
+jobs:
+  unit-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clone
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "lts/*"
+          cahce: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run tests
+        run: npm run test -- --no-watch --code-coverage --browsers=ChromeHeadlessCI
